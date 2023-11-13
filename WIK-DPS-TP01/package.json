@@ -1,0 +1,24 @@
+{
+	"name": "wik-dps-tp01",
+	"version": "1.0.0",
+	"description": "TP01",
+	"main": "dist/index.js",
+	"scripts": {
+		"build": "tsc",
+		"start": "npm run build && node dist/index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/UnEpicier/devops.git"
+	},
+	"author": "Un Épicier",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/UnEpicier/devops/issues"
+	},
+	"homepage": "https://github.com/UnEpicier/devops#readme",
+	"devDependencies": {
+		"@types/node": "^20.9.0",
+		"typescript": "^5.2.2"
+	}
+}
