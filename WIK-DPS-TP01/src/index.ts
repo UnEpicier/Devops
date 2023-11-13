@@ -1,6 +1,6 @@
-import http from 'http';
+import { createServer } from 'http';
 
-const server = http.createServer(async (req, res) => {
+const server = createServer(async (req, res) => {
 	if (req.url == '/ping') {
 		res.writeHead(200, { 'Content-Type': 'application/json' });
 		res.write(JSON.stringify(req.headers));

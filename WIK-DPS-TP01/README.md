@@ -6,21 +6,20 @@ Building a TypeScript API with the fewest dependencies
 
 ## Prerequisites
 
--   [Node.js](https://nodejs.org/en/) (v14.15.4)
--   [TypeScript](https://www.typescriptlang.org/) (v4.1.3)
+-   [Node.js](https://nodejs.org/en/)
 
-## Setup
+## Setup & Run
+
+Install all dependencies packages with:
 
 ```bash
-npm init -y
-npm install --save-dev typescript
-npx tsc --init --rootDir src --outDir dist --esModuleInterop --resolveJsonModule --lib es6 --module commonjs --allowJs true --noImplicitAny true
+npm ci
 ```
 
-## Run
+Then launch the API with:
 
 ```bash
-npm start # -> npx tsc && node dist/index.js
+npm start
 ```
 
 Call the API with [http://localhost:3000/ping](http://localhost:3000/ping). You will get a response with the request headers.
