@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+    # Redis
+    redis:
+        image: redis:latest
+        container_name: redis
+        restart: always
+        volumes:
+            - ./redis:/data
+
+    # MySQL
+    mysql:
+        image: mysql:latest
+        container_name: mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: wp_db
+            MYSQL_USER: wordpress
+            MYSQL_PASSWORD: wordpress
+        volumes:
+            - ./mysql:/var/lib/mysql
+
+    # Wordpress
+    wordpress:
+        image: wordpress:latest
+        container_name: wordpress
+        restart: always
+        environment:
+            WORDPRESS_DB_HOST: mysql:3306
+            WORDPRESS_DB_USER: wordpress
+            WORDPRESS_DB_PASSWORD: wordpress
+            WORDPRESS_DB_NAME: wp_db
+            WORDPRESS_CONFIG_EXTRA: |
+                define('WP_REDIS_HOST', 'redis');
+                define('WP_CACHE_KEY_SALT', 'salty');
+        replicas: 2
+        volumes:
+            - ./wordpress:/var/www/html
+        depends_on:
+            - mysql
+            - redis
+
+    # Nginx
+    nginx:
+        image: nginx:latest
+        container_name: reverse_proxy
+        restart: always
+        ports:
+            - 80:80
+        volumes:
+            - ./nginx.conf:/etc/nginx/nginx.conf:ro
+        depends_on:
+            - wordpress
